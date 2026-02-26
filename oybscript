@@ -1,1 +1,162 @@
+-- OYB Hub Roblox Executor Script
 
+local Player = game:GetService("Players").LocalPlayer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Create the ScreenGui
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "OYB_Hub_GUI"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = Player:WaitForChild("PlayerGui")
+
+-- Create the main frame
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "OYB_Hub_Frame"
+MainFrame.Size = UDim2.new(0, 400, 0, 250)
+MainFrame.Position = UDim2.new(0.5, -200, 0.5, -125) -- Centered
+MainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+MainFrame.BorderColor3 = Color3.fromRGB(25, 25, 25)
+MainFrame.BorderSizePixel = 2
+MainFrame.Draggable = true -- Make the frame draggable
+MainFrame.Parent = ScreenGui
+
+-- Add a UI Corner for rounded edges
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 8)
+UICorner.Parent = MainFrame
+
+-- Create the title bar
+local TitleBar = Instance.new("Frame")
+TitleBar.Name = "TitleBar"
+TitleBar.Size = UDim2.new(1, 0, 0, 30)
+TitleBar.Position = UDim2.new(0, 0, 0, 0)
+TitleBar.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+TitleBar.BorderColor3 = Color3.fromRGB(25, 25, 25)
+TitleBar.BorderSizePixel = 1
+TitleBar.Parent = MainFrame
+
+-- Add UI Corner to TitleBar (only top corners)
+local TitleBarUICorner = Instance.new("UICorner")
+TitleBarUICorner.CornerRadius = UDim.new(0, 8)
+TitleBarUICorner.Parent = TitleBar
+
+-- Create the title text
+local TitleText = Instance.new("TextLabel")
+TitleText.Name = "TitleText"
+TitleText.Size = UDim2.new(1, -60, 1, 0)
+TitleText.Position = UDim2.new(0, 5, 0, 0)
+TitleText.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+TitleText.BackgroundTransparency = 1
+TitleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleText.Font = Enum.Font.SourceSansBold
+TitleText.TextSize = 20
+TitleText.TextXAlignment = Enum.TextXAlignment.Left
+TitleText.Text = "OYB Hub"
+TitleText.Parent = TitleBar
+
+-- Create the close button
+local CloseButton = Instance.new("TextButton")
+CloseButton.Name = "CloseButton"
+CloseButton.Size = UDim2.new(0, 25, 0, 25)
+CloseButton.Position = UDim2.new(1, -30, 0, 2.5)
+CloseButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+CloseButton.BorderColor3 = Color3.fromRGB(25, 25, 25)
+CloseButton.BorderSizePixel = 1
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.SourceSansBold
+CloseButton.TextSize = 18
+CloseButton.Text = "X"
+CloseButton.Parent = TitleBar
+
+-- Add UI Corner to CloseButton
+local CloseButtonUICorner = Instance.new("UICorner")
+CloseButtonUICorner.CornerRadius = UDim.new(0, 4)
+CloseButtonUICorner.Parent = CloseButton
+
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- Create the maintenance message
+local MaintenanceMessage = Instance.new("TextLabel")
+MaintenanceMessage.Name = "MaintenanceMessage"
+MaintenanceMessage.Size = UDim2.new(1, -40, 0, 100)
+MaintenanceMessage.Position = UDim2.new(0, 20, 0, 60)
+MaintenanceMessage.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+MaintenanceMessage.BackgroundTransparency = 1
+MaintenanceMessage.TextColor3 = Color3.fromRGB(255, 255, 255)
+MaintenanceMessage.Font = Enum.Font.SourceSans
+MaintenanceMessage.TextSize = 16
+MaintenanceMessage.TextWrapped = true
+MaintenanceMessage.TextXAlignment = Enum.TextXAlignment.Center
+MaintenanceMessage.Text = "The script is currently under maintenance. Stay tuned for updates on our Discord server."
+MaintenanceMessage.Parent = MainFrame
+
+-- Create the Discord link text
+local DiscordLinkText = Instance.new("TextLabel")
+DiscordLinkText.Name = "DiscordLinkText"
+DiscordLinkText.Size = UDim2.new(1, -40, 0, 20)
+DiscordLinkText.Position = UDim2.new(0, 20, 0, 160)
+DiscordLinkText.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+DiscordLinkText.BackgroundTransparency = 1
+DiscordLinkText.TextColor3 = Color3.fromRGB(100, 150, 255)
+DiscordLinkText.Font = Enum.Font.SourceSans
+DiscordLinkText.TextSize = 14
+DiscordLinkText.TextXAlignment = Enum.TextXAlignment.Center
+DiscordLinkText.Text = "https://discord.gg/mMXfF8Haa4"
+DiscordLinkText.Parent = MainFrame
+
+-- Create the copy Discord link button
+local CopyDiscordButton = Instance.new("TextButton")
+CopyDiscordButton.Name = "CopyDiscordButton"
+CopyDiscordButton.Size = UDim2.new(0, 150, 0, 30)
+CopyDiscordButton.Position = UDim2.new(0.5, -75, 0, 200)
+CopyDiscordButton.BackgroundColor3 = Color3.fromRGB(70, 100, 200)
+CopyDiscordButton.BorderColor3 = Color3.fromRGB(25, 25, 25)
+CopyDiscordButton.BorderSizePixel = 1
+CopyDiscordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CopyDiscordButton.Font = Enum.Font.SourceSansBold
+CopyDiscordButton.TextSize = 16
+CopyDiscordButton.Text = "Copy Discord Link"
+CopyDiscordButton.Parent = MainFrame
+
+-- Add UI Corner to CopyDiscordButton
+local CopyButtonUICorner = Instance.new("UICorner")
+CopyButtonUICorner.CornerRadius = UDim.new(0, 6)
+CopyButtonUICorner.Parent = CopyDiscordButton
+
+CopyDiscordButton.MouseButton1Click:Connect(function()
+    -- This functionality depends on the executor's capabilities.
+    -- Most executors have a function like setclipboard or copytoclipboard.
+    -- For general compatibility, we'll print it and assume the user can copy manually if the executor doesn't support it.
+    local discordLink = "https://discord.gg/mMXfF8Haa4"
+    
+    -- Attempt to use common executor clipboard functions
+    if syn and syn.setclipboard then
+        syn.setclipboard(discordLink)
+        warn("Discord link copied to clipboard using syn.setclipboard!")
+    elseif setclipboard then
+        setclipboard(discordLink)
+        warn("Discord link copied to clipboard using setclipboard!")
+    else
+        warn("Executor does not support direct clipboard access. Please copy the link manually: " .. discordLink)
+    end
+    
+    -- Provide visual feedback (optional)
+    local originalText = CopyDiscordButton.Text
+    CopyDiscordButton.Text = "Copy!"
+    task.delay(2, function()
+        CopyDiscordButton.Text = originalText
+    end)
+end)
+
+-- Make the frame draggable (basic implementation, executors usually handle this better)
+-- This part is often handled by the executor itself if MainFrame.Draggable = true is set.
+-- However, for older/less capable executors, a manual drag function might be needed.
+-- I'll keep the Draggable property set to true as it's the standard way.
+
+-- Ensure the script runs on various executors by using basic Roblox API calls.
+-- The use of `Player:WaitForChild("PlayerGui")` is standard.
+-- The clipboard functionality is the most executor-dependent part, handled with checks.
+
+-- You can inject this script into Roblox using your preferred executor. Enjoy!
